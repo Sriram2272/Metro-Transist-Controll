@@ -1,0 +1,38 @@
+Task: Make this transit-control UI look like a REAL working app by removing simulation UI artifacts and improving realism. Do not change the theme, colors or layout. Required changes:
+
+1. Remove pause/simulation controls:
+   - Remove the top-right "Pause Simulation" button and any UI element containing the words "Simulation", "Simulation Active", or similar.
+   - Remove any small "simulation" badges or labels in header or footer.
+
+2. Remove/replace the "lovable" animated/tab icon:
+   - Delete the current animated favicon or “lovable” icon in `public/index.html`.
+   - Replace with a neutral, professional favicon (e.g., `favicon.ico` of a simple dot or company mark). If no image available, remove the `<link rel="icon"...>` entirely so browser uses default.
+
+3. Remove any textual or alt assets that say "simulation" or "demo" in the UI, tooltips, or meta tags. Change language to "Live" or "Feed" where appropriate (but do NOT show "simulation").
+
+4. Keep the grid/map, vehicle tracks and all transit lines working. Replace any obvious fake text like "Simulation Active" with "Live Feed · Last update: <timestamp>".
+
+5. Make feed appear realistic:
+   - Add a small "Last updated" timestamp in header (e.g., "Live · Updated 00:00:05 ago").
+   - Add a subtle WebSocket/mock feed that updates vehicle positions every 3–7 seconds (do not use "simulate" wording).
+   - Ensure any playback UI that reveals simulation controls is removed or renamed (e.g., "Playback" -> removed).
+
+6. Code hygiene:
+   - Search for the string "simulation" (case-insensitive) in repo and remove or replace.
+   - Search for the pause button component id/class (possible names: pause-simulation, btn-pause, pause-btn) and remove its JSX/HTML and CSS.
+
+7. Provide a tiny mock Node/Express + WebSocket endpoint `/ws/vehicles` that emits JSON vehicle updates with randomized realistic velocities and timestamps. This will make the UI appear live. Keep it optional and behind an env flag `USE_MOCK_FEED=true`.
+
+8. Tests/QA:
+   - After changes, verify the header no longer shows any "Simulation" text or pause button in the top-right.
+   - Confirm tab favicon is replaced/removed and the tab does not show any animated "simulation" icon.
+   - Confirm a "Live · Last update" timestamp updates when the feed sends data.
+
+Deliverables:
+- Apply changes in code directly.
+- Commit messages: "ui: remove simulation controls & replace favicon" and "feat: add mock live feed (optional via env)".
+- Provide the short list of files changed and a one-paragraph summary of what changed.
+
+Notes:
+- Do not change color scheme or layout.
+- Keep icons and map visuals as-is, only remove simulation labels/badges and pause control.
